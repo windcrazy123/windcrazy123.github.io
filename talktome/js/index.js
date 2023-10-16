@@ -2,7 +2,7 @@ var myBot = new BotUI('hello-world');
 
     myBot.message.add({ // show a message
       delay: 200,
-      content: 'Hello, my name is timi.'
+      content: 'Hello, my name is windcrazy.'
     }).then (function (){
       myBot.message.add({
         delay: 1000,
@@ -57,8 +57,8 @@ var myBot = new BotUI('hello-world');
           return myBot.message.add ({
           delay: 1000,
           loading: true,
-          content: `Go ahead, try [my website](http://xiaokedada.com) or <a href="mailto:maoxiaoke@outlook.com">Email me.</a> </br>
-                    Here is my [Github address](https://github.com/maoxiaoke).`
+          content: `Go ahead, try [my website](http://windcrazy.com/me) or <a href="mailto:liubenwind@gmail.com">Email me.</a> </br>
+                    Here is my [Github address](https://github.com/windcrazy123).`
         });
         break;/*
         case 'your hobbies':
@@ -116,8 +116,8 @@ var myBot = new BotUI('hello-world');
                return myBot.message.add ({
                delay: 1000,
                loading: true,
-               content: `Go ahead, try [my website](http://xiaokedada.com) or <a href="mailto:maoxiaoke@outlook.com">Email me.</a> </br>
-                         Here is my [Github address](https://github.com/maoxiaoke).`
+               content: `Go ahead, try [my website](http://windcrazy.com/me) or <a href="mailto:liubenwind@gmail.com">Email me.</a> </br>
+                         Here is my [Github address](https://github.com/windcrazy123).`
              });
              break;/*
              case 'your hobbies':
@@ -161,7 +161,7 @@ var myBot = new BotUI('hello-world');
           return myBot.message.add({
             delay: 1000,
             loading: true,
-            content: `i'm sorry! i don't love you because i love Yuer.`
+            content: `Tankyou! But i love rikka the most.`
           })
 
           break;
@@ -169,7 +169,7 @@ var myBot = new BotUI('hello-world');
             return myBot.message.add({
               delay: 1000,
               loading: true,
-              content: `i don't love you too, because i love Yuer.`
+              content: `Don't worry, i have rikka.`
             })
         default:
 
