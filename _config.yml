@@ -1,15 +1,14 @@
 # Site settings
-name: 小可嗒嗒的博客
-email: maoxiaoke@outlook.com
-author: M/J
-url: http://xiaokedada.com
-resume_site: http://xiaokedada.com/me/
-github: https://github.com/maoxiaoke/
+name: WindCrazy
+email: liubenwind@gmail.com
+author: LBD
+url: http://windcrazy.com
+resume_site: http://windcrazy.com/me/
+github: https://github.com/windcrazy123
 baseurl: ""  #根目录
-description: 假如生活欺骗了你，不要悲伤，不要哭泣。
-motto: 我们笑着说再见，却深知再见遥遥无期。
-#motto: 如果生活欺骗了你，不要悲伤，不要哭泣。
-banner: 我想带你去看绚丽的山峦，去看秀丽的溪谷，这份心情，人类是如何称呼的呢。
+description: 源码之下，了无秘密
+motto: 让我们携手共创奇迹！
+banner: 我尽力写清晰、富含有用的信息，但是可能做得更好的办法。
 #permalink: /:categories/:year/:month/:day/:title/
 permalink: /:year/:month/:day/:title/
 excerpt_separator:  '<!-- more -->' #文章摘要
@@ -17,11 +16,11 @@ paginate: 8
 paginate_path: "page:num"
 gems: [jekyll-paginate]
 exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
-github_username: maoxiaoke
+github_username: windcrazy123
 highlighter: rouge
 markdown: kramdown
-FB:
-  comments :
-    provider : disqus
-    disqus :
-        short_name : xiaokedada
+# FB:
+#   comments :
+#     provider : disqus
+#     disqus :
+#         short_name : windcrazy
