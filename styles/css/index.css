@@ -877,8 +877,6 @@ textarea.input-group-sm>.form-control,textarea.input-group-sm>.input-group-addon
 .navbar-fixed-bottom,.navbar-fixed-top{position:fixed;right:0;left:0;border-width:0 0 1px}
 .navbar-fixed-top{z-index:1030;top:0}
 
-.mycatalog-fixed-top{position:fixed;right:40;left:50;border-width:0 0 1px;top: 260px;}
-.list_click{color: #04D;}
 
 .navbar-fixed-bottom{bottom:0;margin-bottom:0}
 .navbar-brand{float:left;padding:20px 15px;font-size:18px;line-height:20px}
