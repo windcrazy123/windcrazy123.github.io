@@ -63,7 +63,7 @@ layout: default
           var header = document.querySelector('.sidebar.hidden-print');
           var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 
-          if (scrollPosition === 0) {
+          if (scrollPosition > 260) {
             header.classList.remove('affix');
           } else {
             header.classList.add('affix-top');
