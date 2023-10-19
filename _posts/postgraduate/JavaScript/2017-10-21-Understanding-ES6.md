@@ -6,7 +6,7 @@ categories: 研究生涯
 tag: JavaScript
 ---
 * content
-{:toc}
+{:toc #markdown-toc}
 
 在[编写自己的代码库]({{ '/2017/07/20/Clean-Code' | prepend: site.baseurl }})中我曾经表达了自己对 JavaScript 的理解。今日(2017.10.21)阅读 Nicholas C.Zakes 的 《Understanding ES6》，Redux 的创造者 Dan Abramov 在序言中提到：
 
