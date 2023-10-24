@@ -1,2 +1,6 @@
 _site
 .sass-cache
+.vs
+.vscode
+.git
+.idea
