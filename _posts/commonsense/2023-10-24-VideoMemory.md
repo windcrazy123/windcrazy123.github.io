@@ -8,6 +8,10 @@ tag: Computer
 * content
 {:toc #markdown-toc}
 
+这是一些关于显卡的常识，比如显存等
+
+<!-- more -->
+
 ## 显存
 
 [显卡显存大小有什么用](https://cloud.tencent.com/developer/news/690849)
