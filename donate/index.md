@@ -7,7 +7,7 @@ date: 2017-02-18 18:34:51 +0800
 
 这个博客的目的之一，在于对自己有个回顾。有很多的知识和内容都是来源于网络与自我学习。看了很多书，花了很多精力来组织和总结。
 
-希望做好一个游戏，让玩她的人开心
+希望做好一个游戏，让玩此游戏的人开心
 
 -----------------------------------------
 
@@ -19,7 +19,7 @@ date: 2017-02-18 18:34:51 +0800
 
 您可以选择手机支付宝扫一扫
 
-<img src="{{ '/styles/images/zhifubao.jpg' | prepend: site.baseurl }}" alt="支付宝二维码付款给windcrazy" />
+<img src="{{ '/styles/images/zhifubao.jpg' | prepend: site.baseurl }}" alt="支付宝二维码付款给windcrazy" height="160" width="160" />
 
 -----------------------------------------
 
@@ -27,7 +27,8 @@ date: 2017-02-18 18:34:51 +0800
 
 您可以选择手机微信扫一扫
 
-![微信二维码付款给windcrazy]({{ '/styles/images/wechat.jpg' | prepend: site.baseurl }})
+<!-- ![微信二维码付款给windcrazy]({{ '/styles/images/wechat.jpg' | prepend: site.baseurl }}) -->
+<img src="{{ '/styles/images/wechat.jpg' | prepend: site.baseurl }}" alt="微信二维码付款给windcrazy" height="160" width="160" />
 
 ------------------------------------------
 
