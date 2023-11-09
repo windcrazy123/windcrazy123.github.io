@@ -32,6 +32,8 @@ abbr {text-decoration: none;}
 <hr><h4 class="btn btn-primary btn-lg">开发相关</h4><hr>
 <ol class="rounded-list">
 <li><a href="https://github.com/guanpengchn/awesome-books" target="_blank">开发者推荐书籍</a></li>
+<li><a href="https://developer.oculus.com/documentation/unreal/" target="_blank">VR开发文档-Oculus</a></li>
+<li><a href="https://developer-cn.pico-interactive.com/document/unreal/" target="_blank">VR开发文档-Pico</a></li>
 </ol>
 
 <hr><h4 class="btn btn-info btn-lg">资源网站</h4><hr>
@@ -45,12 +47,21 @@ abbr {text-decoration: none;}
 
 <hr><h4 class="btn btn-primary btn-lg">UE</h4><hr>
 <ol class="rounded-list">
+<li><a href="https://github.com/EpicGames/UnrealEngine" target="_blank">UESourceCode</a></li>
 <li><a href="https://www.zhihu.com/people/fjz13/posts" target="_blank">大钊知乎文章</a></li>
 <li><a href="https://docs.unrealengine.com/5.2/zh-CN/" target="_blank">UE官方文档</a></li>
+<li><a href="https://www.reddit.com/r/unrealengine" target="_blank">UE论坛-reddit</a></li>
+<li><a href="https://ari.games/" target="_blank">UE-ari布道</a></li>
+<li><a href="https://www.twitch.tv/search?term=unrealengine" target="_blank">UE-Twitch</a></li>
 </ol>
 
 <hr><h4 class="btn btn-info btn-lg">算法网站</h4><hr>
 <ol class="rectangle-list">
 <li><a href="https://www.codewars.com/" target="_blank">Code Kata</a></li>
 <li><a href="https://leetcode.cn" target="_blank">leetcode</a></li>
+</ol>
+
+<hr><h4 class="btn btn-primary btn-lg">ChatGPT</h4><hr>
+<ol class="rounded-list">
+<li><a href="https://poe.com/ChatGPT" target="_blank">POE</a></li>
 </ol>
