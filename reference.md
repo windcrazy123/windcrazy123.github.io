@@ -27,6 +27,7 @@ abbr {text-decoration: none;}
 <li><a href="https://github.com/liu-jianhao/Cpp-Design-Patterns" target="_blank">C++设计模式</a></li>
 <li><a href="https://github.com/SilverMaple/STLSourceCodeNote" target="_blank">STLSourceCodeNote</a></li>
 <li><a href="https://github.com/changkun/modern-cpp-tutorial" target="_blank">Modern C++ Tutorial</a></li>
+<li><a href="https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/">Google开源项目风格指南</a></li>
 </ol>
 
 <hr><h4 class="btn btn-primary btn-lg">开发相关</h4><hr>
