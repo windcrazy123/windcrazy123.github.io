@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "UE 接OculusSDK"
+title: "UE 接Oculus平台SDK"
 date: 2022-10-20 09:00:00 +0800 
 categories: UE
 tag: VR
@@ -31,11 +31,11 @@ tag: VR
 
 登录到[开发者界面](https://developer.oculus.com/manage/)点击右上角绿色Create New App
 
-![](D:\Githubio\windcrazy123.github.io\styles\images\VR\CreateNewApp.png)
+<img src="{{ '/styles/images/VR/CreateNewApp.png' | prepend: site.baseurl }}" />
 
 然后输入你应用的名字，然后选择平台我是Quest就选了`Meta Quest（App Lab）`，最后点击`创建`，刷新页面（此示例名称是UESDKTest）；之后点击进入UESDKTest,在左侧边栏点击API就可以看到你的App ID了
 
-![](D:\Githubio\windcrazy123.github.io\styles\images\VR\UESDKTestAPI.png)
+<img src="{{ '/styles/images/VR/UESDKTestAPI.png' | prepend: site.baseurl }}" />
 
 ## 配置开发环境
 
@@ -79,7 +79,17 @@ RiftAppId =[ rift 应用程序 ID ]
 
  在start message pump后立马添加**Entitlement Get Is Viewer Entitled** 节点 .
 
-![](D:\Githubio\windcrazy123.github.io\styles\images\VR\EntitlementCheck.png)
+<img src="{{ '/styles/images/VR/EntitlementCheck.png' | prepend: site.baseurl }}" />
+
+
+
+## 测试
+
+在测试 Platform SDK 功能之前，必须将应用程序的发布版本上传到开发人员中心。您只需执行一次此操作，然后可以在本地进行测试并进行更改，而无需重新上传。请参阅[上传 Meta Quest 的应用程序](https://developer.oculus.com/resources/publish-uploading-mobile/)。
+
+我使用UE编辑器上传
+
+<img src="{{ '/styles/images/VR/UEMetaXRPlatformWindow.png' | prepend: site.baseurl }}" />
 
 
 
@@ -88,29 +98,46 @@ RiftAppId =[ rift 应用程序 ID ]
 
 
 
+## 移动应用程序签名
+
+- 签署应用程序。请参阅[移动应用程序签名](https://docs.unrealengine.com/5.2/en-US/signing-android-projects-for-release-on-the-google-play-store-with-unreal-engine/)Unreal 小节。
+- **在编辑器中Edit** > **Project Settings** > **Platforms** > **Android**修改以下设置
+  - **Android Package Name**- 这应该与开发人员中心设置匹配
+  - **Store Version**- 每次上传 apk 都需要一个唯一的商店版本号，该版本号可以是手动递增的数字。
+  - **Install Location**- Auto
+
+> 注：如果报错java.io.filenotfoundexception:android.keystore（拒绝访问）这是因为权限问题：你的jdk目录在c盘，当前用户无写入权限。
+>
+> 方法一更改保存目录：就是讲jdk从c盘挪到其它盘。
+>
+> 方法二更改权限：以管理员身份运行CMD。（我用这个）
+>  1. 键盘按下win键或点击桌面左下角【开始】，输入cmd
+>
+>  2. 对搜索结果的cmd程序点击【以管理员身份运行】
+>
+>  3. 重新按照[Unreal小节](https://docs.unrealengine.com/5.2/en-US/signing-android-projects-for-release-on-the-google-play-store-with-unreal-engine/)签署应用程序
+>
+> 我这里出现了一个警告Warning:JKS 密钥库使用专用格式。建议使用 "keytool -importkeystore -srckeystore ExampleKey.keystore -destkeystore ExampleKey.keystore -deststoretype pkcs12" 迁移到行业标准格式 PKCS12。
+>
+> 另外，我的keytool.exe在C:\Program Files\Android\jdk\jdk-8.0.302.8-hotspot\jdk8u302-b08\jre\bin>
+
+## Oculus在虚幻中的实例
+
+在[这里](https://developer.oculus.com/documentation/unreal/unreal-samples/)
 
 
 
+## 注意
+
+如果使用MQDH(Meta Quest Developer Hub)进行上传，可能会遇到Actions列下一直在转圈加载或Upload为灰色不可点击，这是由于你的MQDH没有[下载cli](https://developer.oculus.com/resources/publish-reference-platform-command-line-utility/)，你需要把下载的exe文件放在 `~/AppData/Roaming/odh/ovr-platform-util.exe`，重启后就可以上传了
+
+<img src="{{ '/styles/images/VR/MQDHUpload.png' | prepend: site.baseurl }}" />
 
 
 
+## 参考
 
+Oculus视频-[AR & VR at Meta Open Source](https://www.youtube.com/watch?v=CGdMfIB_00o&list=PLzIwronG0sE4Ooku7Nvlpd4locUZAHzjb)
 
+MQDH下载：https://developer.oculus.com/documentation/unreal/ts-odh/
 
-
-
-
-
-[**生成keystore是报错拒绝访问(已测试)**](https://blog.51cto.com/rickyh/1889153)
-
-1. 請點選左下角的「開始」。
-2. 請在下方的搜尋欄位輸入「CMD」。
-3. 對搜尋結果的CMD應用程式點選滑鼠右鍵。 (如圖1.)
-4. 再點選「以系統管理員身分執行(A)」
-
-Warning:
-JKS 密钥库使用专用格式。建议使用 "keytool -importkeystore -srckeystore ExampleKey.keystore -destkeystore ExampleKey.keystore -deststoretype pkcs12" 迁移到行业标准格式 PKCS12。
-
-C:\Program Files\Android\jdk\jdk-8.0.302.8-hotspot\jdk8u302-b08\jre\bin>
-
-https://www.youtube.com/watch?v=CGdMfIB_00o&list=PLzIwronG0sE4Ooku7Nvlpd4locUZAHzjb
