@@ -66,3 +66,8 @@ abbr {text-decoration: none;}
 <ol class="rounded-list">
 <li><a href="https://poe.com/ChatGPT" target="_blank">POE</a></li>
 </ol>
+
+<hr><h4 class="btn btn-info btn-lg">其他</h4><hr>
+<ol class="rectangle-list">
+<li><a href="https://otp.landian.vip/zh-cn/" target="_blank">Office Tool</a></li>
+</ol>
