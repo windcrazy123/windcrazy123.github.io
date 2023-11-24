@@ -111,3 +111,5 @@ virtual void OnConstruction(const FTransform& Transform) {}
 
 
 > 参考：[Be careful with the Construction Script](https://isaratech.com/ue4-be-careful-with-the-construction-script/)
+>
+> [构造函数和 BeginPlay() 中应该包含什么样的代码？](https://www.reddit.com/r/unrealengine/comments/107vid2/what_kind_of_code_should_be_in_a_constructor_vs/?onetap_auto=true)

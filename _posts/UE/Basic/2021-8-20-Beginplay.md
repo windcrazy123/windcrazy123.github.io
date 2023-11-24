@@ -98,6 +98,26 @@ protected:
 另外在调用此函数前遍历了此Actor的组件，因此组件的Beginplay会更早
 
 ```c++
+void UActorComponent::BeginPlay()
+{
+	TRACE_OBJECT_EVENT(this, BeginPlay);
+
+	check(bRegistered);
+	check(!bHasBegunPlay);
+	checkSlow(bTickFunctionsRegistered); // If this fails, someone called BeginPlay() without first calling RegisterAllComponentTickFunctions().
+
+    //CLASS_CompiledFromBlueprint：表明该类是从蓝图创建的
+    //CLASS_Native：Class is a native class - native interfaces will have CLASS_Native set, but not RF_MarkAsNative   与反射相关见下方 UE 反射实现分析 链接
+	if (GetClass()->HasAnyClassFlags(CLASS_CompiledFromBlueprint) || !GetClass()->HasAnyClassFlags(CLASS_Native))
+	{
+		ReceiveBeginPlay();
+	}
+
+	bHasBegunPlay = true;
+}
+```
+
+```c++
 /** 
 	 * Blueprint implementable event for when the component is beginning play, called before its owning actor's BeginPlay
 	 * or when the component is dynamically created if the Actor has already BegunPlay. 
@@ -107,5 +127,6 @@ protected:
 ```
 
 
-
 > 参考：[C++ for Blueprints](https://www.youtube.com/watch?v=6485d5Zoc_k)
+>
+> [UE 反射实现分析](https://imzlp.com/posts/9780/)
