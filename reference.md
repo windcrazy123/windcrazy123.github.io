@@ -55,12 +55,14 @@ abbr {text-decoration: none;}
 <li><a href="https://ari.games/" target="_blank">UE-ari布道</a></li>
 <li><a href="https://www.twitch.tv/search?term=unrealengine" target="_blank">UE-Twitch</a></li>
 </ol>
-
 <hr><h4 class="btn btn-info btn-lg">算法网站</h4><hr>
 <ol class="rectangle-list">
 <li><a href="https://www.codewars.com/" target="_blank">Code Kata</a></li>
 <li><a href="https://leetcode.cn" target="_blank">leetcode</a></li>
+<li><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html" target="_blank">Data Structure Visualizations</a></li>
+<li><a href="https://oi-wiki.org/" target="_blank">OI Wiki</a></li>
 </ol>
+
 
 <hr><h4 class="btn btn-primary btn-lg">ChatGPT</h4><hr>
 <ol class="rounded-list">
