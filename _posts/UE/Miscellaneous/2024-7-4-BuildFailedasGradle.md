@@ -78,7 +78,12 @@ NDKAPILevel=latest
 
 # 解决办法
 
-在报错中看到了`Incompatible because this component declares an API of a component compatible with Java 11 and the consumer needed a runtime of a component compatible with Java 8`这样一句话。
+在报错中看到了
+
+```
+`Incompatible because this component declares an API of a component compatible with Java 11 and the consumer needed a runtime of a component compatible with Java 8`
+```
+
 怀疑：**需要Java11**
 
 **解决办法：**
@@ -165,7 +170,7 @@ A problem occurred configuring root project 'app'.
 
 Gradle的全局配置(没办法进行项目配置，因为这些配置文件在`Intermediate`每次打包都会更新，不过应该可以不更新，但是我没查，如果你知道请告诉我)
 
-在 C盘用户目录下的.gradle/ 目录下创建 init.gradle 文件(如：`C:\Users\My\\.gradle`)，并添加以下内容：
+在 C盘用户目录下的.gradle/ 目录下创建 init.gradle 文件(如：`C:\Users\My\.gradle`)，并添加以下内容：
 
 ```java
 allprojects {
