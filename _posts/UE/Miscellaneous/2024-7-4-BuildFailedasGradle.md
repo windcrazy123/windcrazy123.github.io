@@ -69,8 +69,8 @@ UATHelper: 打包 (Android (ASTC)): BUILD FAILED in 11m 50s
 
 ```c
 [/Script/AndroidPlatformEditor.AndroidSDKSettings]
-SDKPath=(Path="C:/Users/Wemake/AppData/Local/Android/Sdk")
-NDKPath=(Path="C:/Users/Wemake/AppData/Local/Android/Sdk/ndk/25.1.8937393")
+SDKPath=(Path="C:/Users/My/AppData/Local/Android/Sdk")
+NDKPath=(Path="C:/Users/My/AppData/Local/Android/Sdk/ndk/25.1.8937393")
 JavaPath=(Path="C:/Program Files/Android/Android Studio/jre")
 SDKAPILevel=matchndk
 NDKAPILevel=latest
