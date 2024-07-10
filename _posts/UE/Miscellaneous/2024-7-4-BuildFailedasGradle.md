@@ -152,7 +152,9 @@ A problem occurred configuring root project 'app'.
          > Read timed out
 ```
 
-# 新的问题
+# 新的问题(UE需要从网络上获取资源)
+
+## 一、Could not get resource 'https://repo.maven.apache.org/maven2/...'
 
 配置成功后，出现了新的报错:
 
@@ -195,3 +197,97 @@ allprojects {
 > 参考：[Maven、Gradle 配置国内镜像源](https://www.cnblogs.com/chansblogs/p/12943991.html)
 
 如果安装失败请点击[跳转](#jump)
+
+## 二、Exception in thread "main" java.net.ConnectException: Connection timed out: connect
+
+> 参考：[Flutter新建项目运行报错Exception in thread "main" java.net.ConnectException: Connection timed out: connect](https://www.cnblogs.com/chorkiu/p/14767567.html)
+
+卡在Downloading https\://services.gradle.org/distributions/gradle-6.1.1-all.zip后出现报错：
+
+```
+Exception in thread "main" java.net.ConnectException: Connection timed out: connect
+        at java.net.DualStackPlainSocketImpl.connect0(Native Method)    
+        at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+        at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)     
+        at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+        at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+        at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)   
+        at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+        at java.net.Socket.connect(Socket.java:589)
+        at sun.security.ssl.SSLSocketImpl.connect(SSLSocketImpl.java:666)
+        at sun.security.ssl.BaseSSLSocketImpl.connect(BaseSSLSocketImpl.java:173)
+        at sun.net.NetworkClient.doConnect(NetworkClient.java:180)
+        at sun.net.www.http.HttpClient.openServer(HttpClient.java:463)  
+        at sun.net.www.http.HttpClient.openServer(HttpClient.java:558)
+        at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:264)
+        at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:367)
+        at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:191)
+        at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1156)
+        at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1050)
+        at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:177)
+        at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1492)
+        at sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:263)
+        at org.gradle.wrapper.Download.downloadInternal(Download.java:58)
+        at org.gradle.wrapper.Download.download(Download.java:44)
+        at org.gradle.wrapper.Install$1.call(Install.java:61)
+        at org.gradle.wrapper.Install$1.call(Install.java:48)
+        at org.gradle.wrapper.ExclusiveFileAccessManager.access(ExclusiveFileAccessManager.java:65)  
+        at org.gradle.wrapper.Install.createDist(Install.java:48)
+        at org.gradle.wrapper.WrapperExecutor.execute(WrapperExecutor.java:128)
+        at org.gradle.wrapper.GradleWrapperMain.main(GradleWrapperMain.java:61)
+Running Gradle task 'assembleDebug'...
+Running Gradle task 'assembleDebug'... Done                        26.4s
+Exception: Gradle task assembleDebug failed with exit code 1
+```
+
+有两个方法
+
+### 1、方法一
+
+这个是[lipengzha](https://ue5wiki.com/wiki/6eed44f8/)作者提供的(我试了，没用)
+
+要么打包时开启全局代理(这样好像没办法获取阿里云的maven了)，要么将*https\://services.gradle.org/distributions/gradle-6.1.1-all.zip*复制粘贴到浏览器上(复制你们自己的，我是6.1.1版本)，下载下来解压到以下路径：
+
+```
+C:\Users\lipengzha\.gradle\wrapper\dists\gradle-5.4.1-all\3221gyojl5jsh0helicew7rwx\gradle-6.1.1
+```
+
+然后创建一个环境变量 `ANDROID_HOME` 指向该路径即可。
+
+### 2、方法二
+
+仍然是下载对应版本的gradle压缩包，这个压缩包放在哪里都可以无需解压。
+
+找到你安装UE引擎的路径点开，我的是：
+
+```
+C:\Program Files\Epic Games\UE_5.1\Engine\Build\Android\Java\gradle\gradle\wrapper
+```
+
+打开文件夹里面的`gradle-wrapper.properties`文件，将文件
+
+```properties
+distributionUrl=https\://services.gradle.org/distributions/gradle-6.1.1-all.zip
+```
+
+改为(就是你的下载位置，我的是在 *C:\Users\My\\.gradle\wrapper\dists\gradle-6.1.1-all\cfmwm155h49vnt3hynmlrsdst* 位置)
+
+```properties
+#distributionUrl=https\://services.gradle.org/distributions/gradle-6.1.1-all.zip
+distributionUrl=file:///C:/Users/My/.gradle/wrapper/dists/gradle-6.1.1-all/cfmwm155h49vnt3hynmlrsdst/gradle-6.1.1-all.zip
+```
+
+那么此时打包log则变为，之后等一会如果没其他问题就成功了。
+
+```
+Creating rungradle.bat to work around commandline length limit (using unused drive letter Y:)
+Making .apk with Gradle...
+
+Running: cmd.exe /c "C:\Users\My\Documents\Unreal Projects\PicoVanGogh_8x8\Intermediate\Android\arm64\gradle\rungradle.bat" :app:assembleDebug
+Downloading file:/C:/Users/My/.gradle/wrapper/dists/gradle-6.1.1-all/cfmwm155h49vnt3hynmlrsdst/gradle-6.1.1-all.zip
+....................................................................................................................................
+Unzipping C:\Users\My\.gradle\wrapper\dists\gradle-6.1.1-all\5t4tzev1x9ryeduc4hzp0bwx4\gradle-6.1.1-all.zip to C:\Users\My\.gradle\wrapper\dists\gradle-6.1.1-all\5t4tzev1x9ryeduc4hzp0bwx4
+
+Welcome to Gradle 6.1.1!
+```
+
