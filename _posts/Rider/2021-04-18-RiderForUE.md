@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "2022Rider For UE"
+title: "Rider For UE"
 date: 2021-04-18 09:00:00 +0800 
 categories: Others
 tag: 资源
@@ -8,7 +8,7 @@ tag: 资源
 * content
 {:toc #markdown-toc}
 
-Rider For Unreal Engine 2022学习版 dddd
+Rider For Unreal Engine 学习版 dddd
 
 **仅用于学习目的，请不要用于商业项目。**
 
@@ -27,13 +27,13 @@ Rider For Unreal Engine 2022学习版 dddd
 
 <img src="{{ '/styles/images/Rider/2.jpg' | prepend: site.baseurl }}" />
 
-4.点击上面链接中的Rider图标，复制key。（记住版本，后面有用）
+4.点击上面链接中的Rider图标，复制key。~~（记住版本，后面有用）~~(经过测试发现key可以使用包括显示版本之前的版本，测试key版本2024.1测试Rider版本：2024.1, 2023.3,2023.2, 2023.1)
 
 <img src="{{ '/styles/images/Rider/3.jpg' | prepend: site.baseurl }}" />
 
-5.去官网下载步骤4对应的版本，进行安装。
+5.去官网下载~~步骤4对应的版本~~Rider，进行安装。
 
-6.打开步骤3解压的文件，先执行**scripts/uninstall-all-users.vbs**，然后等待，**等弹出Done的窗口后（需要一会儿）**，再执行**scripts/install-all-users.vbs** 或者 **scripts/install-current-user.vbs，**然后等待即可，**等弹出Done的窗口后（需要一会儿）**，就算成功了。
+6.打开步骤3解压的文件，先执行**scripts/uninstall-all-users.vbs**，然后等待，**等弹出Done的窗口后（需要一会儿）**，再执行**scripts/install-all-users.vbs** 或者 **scripts/install-current-user.vbs，**然后等待即可，**等弹出Done的窗口后（需要一会儿）**，就算成功了。(这个没有进行不同版本测试)
 
 7.这时候打开Rider,在Licenses界面退出你登陆的账号（如果你没有登陆账号，此步骤可忽略）
 
