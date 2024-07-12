@@ -14,7 +14,7 @@ tag: Misc
 
 # 一、UE配置Source Code中无法关联Rider
 
-![](../../styles/images/Rider/UESouceCodeRider.png)
+![](/styles/images/Rider/UESouceCodeRider.png)
 
 完毕后如果在UE中无法关联Rider，请查看：https://www.cnblogs.com/chevin/p/16083202.html
 
@@ -32,7 +32,7 @@ JetBrains Rider 2024.1.4 RD-241.18034.76
 
 在安装Rider并打开UE项目后会让你下载RiderLink plugin
 
-![](../../styles/images/Rider/InstallRiderLinkWarning.png)
+![](/styles/images/Rider/InstallRiderLinkWarning.png)
 
 点击Install plugin in Engine开始下载并编译，开始的时候出现
 
@@ -58,9 +58,9 @@ RiderLink plugin installed
 
 虽然看起来没有问题，但是在点击运行项目后会卡在75%加载插件的一步然后出现崩溃报错。
 
-![](../../styles/images/Rider/RiderLinkError.png)
+![](/styles/images/Rider/RiderLinkError.png)
 
-![](../../styles/images/Rider/UECrashasRiderLink.png)
+![](/styles/images/Rider/UECrashasRiderLink.png)
 
 ## 解决问题
 
@@ -72,7 +72,7 @@ Detected compiler newer than Visual Studio 2022, please update min version check
 
 既然说编译器版本高，那么我们就降低编译器版本。
 
-1. 转到 Visual Studio 安装程序 -> 修改 -> 单个组件->添加“MSVC v143 - VS 2022 c++ x64/x86 build tools (v14.38-17.8)”![](../../styles/images/Rider/VSInstallMSVC.png)
+1. 转到 Visual Studio 安装程序 -> 修改 -> 单个组件->添加“MSVC v143 - VS 2022 c++ x64/x86 build tools (v14.38-17.8)”![](/styles/images/Rider/VSInstallMSVC.png)
 2. 可以通过转到 VS 安装路径并查看文件夹是否存在来确认它是否安装了正确的文件夹（*C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130*）
 3. 将“C:\Users\My\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml”更改为
 
@@ -117,7 +117,7 @@ Warning：  BuildConfiguration.xml(5): [] The element 'WindowsPlatform' in names
 
 默认情况下，UE 会拉起系统最大线程数量的编译进程。就比如我电脑是16个
 
-![](../../styles/images/Rider/16processes.png)
+![](/styles/images/Rider/16processes.png)
 
 UE 里每个编译任务的 `/zm` 值为 1000：[VCToolChain.cs?q=%2Fzm#L354](https://cs.github.com/EpicGames/UnrealEngine/blob/d11782b9046e9d0b130309591e4efc57f4b8b037/Engine/Source/Programs/UnrealBuildTool/Platform/Windows/VCToolChain.cs?q=/zm#L354)
 表示每个 cl 进程会分配 750M 的虚拟内存：[/Zm (Specify precompiled header memory allocation limit)](https://docs.microsoft.com/en-us/cpp/build/reference/zm-specify-precompiled-header-memory-allocation-limit?view=msvc-160)
