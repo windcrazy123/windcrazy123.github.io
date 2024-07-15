@@ -72,4 +72,5 @@ abbr {text-decoration: none;}
 <hr><h4 class="btn btn-info btn-lg">其他</h4><hr>
 <ol class="rectangle-list">
 <li><a href="https://otp.landian.vip/zh-cn/" target="_blank">Office Tool</a></li>
+<li><a href="https://blueprintue.com/" target="_blank">分享你的蓝图</a></li>
 </ol>
