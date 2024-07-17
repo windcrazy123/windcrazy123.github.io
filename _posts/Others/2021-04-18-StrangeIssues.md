@@ -2,8 +2,8 @@
 layout: post
 title: "疑难杂症"
 date: 2021-04-18 09:00:00 +0800 
-categories: 未整理
-tag: 未整理
+categories: Other
+tag: Issues
 ---
 * content
 {:toc #markdown-toc}
