@@ -1,18 +1,17 @@
 ---
 layout: post
-title: "由于Gradle版本问题导致的打包失败"
+title: "打包问题及解决办法"
 date: 2024-7-4 09:00:00 +0800 
 categories: UE
 tag: Misc
 ---
 * content
 {:toc #markdown-toc}
-
-在新电脑配置Android打包环境后打包可能出现各种各样的错误，本篇将由于Gradle而出现的错误，进行分享。
+~~在新电脑配置Android打包环境后打包可能出现各种各样的错误，本篇将由于Gradle而出现的错误，进行分享~~。将我遇到的一些打包失败的问题和解决办法进行分享
 
 <!-- more -->
 
-# 遇到的问题
+# 一、遇到的问题(Android-Gradle)
 
 ```
 UATHelper: 打包 (Android (ASTC)): Creating rungradle.bat to work around commandline length limit (using unused drive letter Y:)
@@ -289,5 +288,47 @@ Downloading file:/C:/Users/My/.gradle/wrapper/dists/gradle-6.1.1-all/cfmwm155h49
 Unzipping C:\Users\My\.gradle\wrapper\dists\gradle-6.1.1-all\5t4tzev1x9ryeduc4hzp0bwx4\gradle-6.1.1-all.zip to C:\Users\My\.gradle\wrapper\dists\gradle-6.1.1-all\5t4tzev1x9ryeduc4hzp0bwx4
 
 Welcome to Gradle 6.1.1!
+```
+
+# 二、[无法在禁用异常的情况下使用“try”](https://forums.unrealengine.com/t/cannot-use-try-with-exceptions-disabled/326861)
+
+> 参考：[**Cannot use ‘try’ with exceptions disabled**](https://forums.unrealengine.com/t/cannot-use-try-with-exceptions-disabled/326861)
+
+Unreal 不鼓励[使用 c++ 的异常系统](https://answers.unrealengine.com/questions/51798/how-can-i-enable-unwind-semantics-for-c-style-exce.html)。这一设计决策背后有几个原因。使用异常会使代码变得非常复杂，尤其是在像 UE 这样复杂的系统中。它还可能导致内存泄漏。然而，这些问题可以说是由于语言设计本身不佳造成的，在其他语言中可能不会如此频繁地出现，即使在 C++ 开发人员中，异常的使用也被认为是一个公开的讨论。
+Epic团队建议提前检查，而不是事后从故障中恢复。
+你可以使用[断言宏](https://docs.unrealengine.com/latest/INT/Programming/Assertions/index.html)报告意外行为（不可恢复和可恢复）。您还可以使用“checked”函数（如 `CastChecked`），如果出现错误，该函数会自动崩溃并显示诊断消息。大多数情况下，这是关于传递空指针或不支持的配置 - 只有重大错误才会导致这种情况发生。
+但是，如果你非得使用异常，请查看第一个链接并尝试那里的建议，不知道是否适用于较新的引擎版本。
+
+解决办法：在你项目文件夹下的Source里有一个`{ProjectName}.Build.cs`文件，在构造函数中添加一行代码`bEnableExceptions=true`：
+
+```c++
+// Fill out your copyright notice in the Description page of Project Settings.
+
+using UnrealBuildTool;
+
+public class DoubaoTest : ModuleRules
+{
+	public DoubaoTest(ReadOnlyTargetRules Target) : base(Target)
+	{
+        //UEBuildConfiguration.bForceEnableExceptions = true;//如果下面没有试试这个，这个引擎版本低
+		bEnableExceptions = true;//使用引擎5.1.1
+
+		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+	
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+
+		PrivateDependencyModuleNames.AddRange(new string[] {  });
+	}
+}
+
+```
+
+你可以在[源码](https://github.com/EpicGames/UnrealEngine/blob/release/Engine/Source/Programs/UnrealBuildTool/Configuration/ModuleRules.cs)中找到，在886行
+
+```c#
+/// <summary>
+/// Enable exception handling
+/// </summary>
+public bool bEnableExceptions { get; set; }
 ```
 
