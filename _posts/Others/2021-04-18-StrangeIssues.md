@@ -85,3 +85,10 @@ if (_graph.NameToReport.TryGetValue(reportName, out report))
 }
 ```
 
+# 五、Failed to generate project model definition files
+
+```
+Failed to generate project model definition files for 'Configuration: Development Editor, Platform: Win64'
+```
+
+此消息表明 Rider for Unreal Engine 无法从 UnrealBuildTool 获取项目属性，大概是.Target.cs和Editor.Target.cs有问题
