@@ -28,10 +28,15 @@ C++的构造函数是要比`OnConstruction`、`Construction Script`、C++Beginpl
 
 <img src="{{ '/styles/images/Basic/Construction/ConstructionScript.png' | prepend: site.baseurl }}" />
 
-在 C++ 中，它由 `OnConstruction` 方法表示：
+在 C++ 中，它由 `UserConstructionScript` 方法表示：
 
 ```c++
-virtual void OnConstruction(const FTransform& Transform) {}
+/**
+ * Construction script, the place to spawn components and do other setup.
+ * @note Name used in CreateBlueprint function
+ */
+UFUNCTION(BlueprintImplementableEvent, meta=(BlueprintInternalUseOnly = "true", DisplayName = "Construction Script"))
+ENGINE_API void UserConstructionScript();
 ```
 
 这个方便的工具对于定义如何构建 Actor 非常有用。一个典型的用例是当您希望能够设置 Actor 的属性并看到它自动地根据编辑器中的这些参数进行更新时。例如，我们可以使用它来构建一个以`边数`作为属性的多边形Actor，每次编辑`边数`时，我们都可以看到多边形在编辑器中重建和更新（而不是在运行时，但是在运行前，会运行一次构造脚本）。
@@ -44,15 +49,21 @@ virtual void OnConstruction(const FTransform& Transform) {}
 - 了解它如何导致编辑器崩溃，使项目无法编辑，甚至一打开就崩溃
 - 学习如何正确地使用它（构造脚本并不总是唯一的办法）
 
+
+
+`OnConstruction`和`UserConstructionScript`统一由`ExecuteConstruction`函数调用并且`UserConstructionScript`调用要早于`OnConstruction`
+
+
+
 ## 编辑器何时调用构造脚本
 
 这是构造脚本最有趣的一点：它是在编辑器中调用的，而不是在运行时调用的。
 
 并且在编辑器中，可以多次调用它：
 
-- **当Actor产生（Spawn）时**
-- **当Actor移动时**（*PostEditMove*事件）：在这种情况下，当此Object移动时它将被调用多次
-- **当Actor的属性发生更改时**（*PostEditChangeProperty*事件）
+- **当Actor产生（Spawn）时** `UWorld::SpawnActor -> Actor->PostSpawnInitialize -> AActor::FinishSpawning -> ExecuteConstruction`
+- **当Actor移动时**（*PostEditMove*事件）：在这种情况下，当此Object移动时它将被调用多次  `PostEditMove -> RerunConstructionScripts -> ExecuteConstruction`
+- **当Actor的属性发生更改时**（*PostEditChangeProperty*事件）`PostEditChangeProperty -> RerunConstructionScripts -> ExecuteConstruction`
 
 正如我们所看到的，它可以被频繁调用。虽然它确实很有用（如果我更改任何属性，我可以直接看到构造脚本正在重建的对象），但也出现了一些缺点。
 
