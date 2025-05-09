@@ -92,3 +92,7 @@ Failed to generate project model definition files for 'Configuration: Developmen
 ```
 
 此消息表明 Rider for Unreal Engine 无法从 UnrealBuildTool 获取项目属性，大概是.Target.cs和Editor.Target.cs有问题
+
+# 六、No corresponding file with the 'Precompiled Header' property set to 'Create' (/Yc) is found
+
+不知道具体什么原因导致的，但是将Binaries，Intermediate，Saved包括Plugins文件夹内所有的临时文件夹删除后重新生成后就没有这个报错警告了
