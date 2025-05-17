@@ -91,8 +91,17 @@ if (_graph.NameToReport.TryGetValue(reportName, out report))
 Failed to generate project model definition files for 'Configuration: Development Editor, Platform: Win64'
 ```
 
-此消息表明 Rider for Unreal Engine 无法从 UnrealBuildTool 获取项目属性，大概是.Target.cs和Editor.Target.cs有问题
+此消息表明 Rider for Unreal Engine 无法从 UnrealBuildTool 获取项目属性，大概率是.Target.cs和Editor.Target.cs有问题，可先从他俩身上找问题
 
-# 六、No corresponding file with the 'Precompiled Header' property set to 'Create' (/Yc) is found
+# 六、报错No corresponding file with the 'Precompiled Header' property set to 'Create' (/Yc) is found
 
 不知道具体什么原因导致的，但是将Binaries，Intermediate，Saved包括Plugins文件夹内所有的临时文件夹删除后重新生成后就没有这个报错警告了
+
+# 七、预计算可视性体积没用Precomputed Visibility Volume NOT WORK
+
+> 引擎版本5.3.2
+
+找到问题可能是引擎功能丢失：[                     UE5.3~5.4 Precomputed Visibility Volume 功能丢了，希望反馈下                   ](https://forums.unrealengine.com/t/ue5-3-5-4-precomputed-visibility-volume/1589792)
+
+还有引擎代码提交[https://github.com/EpicGames/UnrealEngine/pull/11304](https://github.com/EpicGames/UnrealEngine/pull/11304)
+
