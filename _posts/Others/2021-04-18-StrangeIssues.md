@@ -105,3 +105,16 @@ Failed to generate project model definition files for 'Configuration: Developmen
 
 还有引擎代码提交[https://github.com/EpicGames/UnrealEngine/pull/11304](https://github.com/EpicGames/UnrealEngine/pull/11304)
 
+# 八、未找到合适的转换来编码或解码内容。
+
+> <font color=red>LogWmfMedia: Error: An error occurred in the media session: 未找到合适的转换来编码或解码内容。</font>
+
+遇到问题是由于UE导入的6k视频在MediaPlayer中无法播放，双击视频就会报上面的错误，原因是缺少解码器，经实验是缺少H265HEVC视频格式支持。
+
+[来自设备制造商的 HEVC 视频扩展](https://apps.microsoft.com/detail/9n4wgh0z6vhq?hl=zh-cn&gl=CN)
+
+> 不能下载的看这里
+> 1，[store.rg-adguard.net/](store.rg-adguard.net/)这个网站选择productid，输入:`9n4wgh0z6vhq`，搜索后选择合适的版本下载即可安装。或者选择url，复制微软商店里的链接粘贴进去也能下载。
+> 2，下载appxbundle后缀的安装包双击安装就可以了
+
+> 参考：[Image and video codecs and import formats](https://dev.epicgames.com/community/learning/knowledge-base/yzP1/capturing-reality-image-and-video-codecs-and-import-formats)
