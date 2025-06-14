@@ -349,7 +349,7 @@
             
             <div class="dad-image">
                 <!-- <i class="fas fa-user-tie bounce"></i> -->
-                 <img src="{{ '/styles/images/fqj.jpg' | prepend: site.baseurl }}" />
+                 <img src="https://windcrazy123.github.io/styles/images/fqj.jpg" width="180" height="180"/>
             </div>
             
             <p class="subtitle">在这个特别的日子里，我想告诉您：我永远爱您！</p>
@@ -373,23 +373,23 @@
             
             <div class="section">
                 <h2 class="section-title"><i class="fas fa-gift"></i> 专属祝福</h2>
-                <p>写下您想对爸爸说的话：</p>
+                <p>父亲节快乐！</p>
                 
-                <textarea class="message-input" placeholder="亲爱的爸爸..."></textarea>
+                <textarea class="message-input" placeholder="亲爱的爸爸父亲节快乐！">亲爱的爸爸，父亲节快乐！祝您没有烦恼，天天开心！</textarea>
                 
                 <button class="btn" onclick="generateCard()">生成祝福卡片</button>
                 
                 <div id="cardPreview" style="margin-top: 20px; display: none; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
-                    <h3>给最爱的爸爸：</h3>
+                    <h3>给最爱的爸爸-刘刚：</h3>
                     <p id="cardMessage"></p>
-                    <p style="text-align: right; margin-top: 15px;">爱您的孩子</p>
+                    <p style="text-align: right; margin-top: 15px;">爱您的孩子-刘本栋</p>
                 </div>
             </div>
         </div>
         
         <div class="section">
             <h2 class="section-title"><i class="fas fa-gamepad"></i> 父亲节小游戏</h2>
-            <p>配对成功向爸爸表达爱意！</p>
+            <p>配对成功向您表达爱意！</p>
             
             <div class="game-container">
                 <div class="game-board" id="gameBoard">
@@ -403,6 +403,8 @@
     <div class="footer">
         <p>祝全天下的父亲节日快乐！</p>
         <p class="signature">爱您的孩子</p>
+        <p class="signature">刘本栋</p>
+        <p class="signature">刘子旖</p>
     </div>
 
     <script>
@@ -444,13 +446,15 @@
             
             for (let i = 0; i < 150; i++) {
                 const confetti = document.createElement('div');
+                const OnTest = document.getElementById('cardMessage');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + 'vw';
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 confetti.style.width = Math.random() * 10 + 5 + 'px';
                 confetti.style.height = Math.random() * 10 + 5 + 'px';
                 confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
-                document.body.appendChild(confetti);
+                // document.body.appendChild(confetti);
+                OnTest.insertBefore(confetti);
                 
                 // 动画结束后移除元素
                 setTimeout(() => {
@@ -534,5 +538,9 @@
             item.style.animationDelay = Math.random() * 0.5 + 's';
         });
     </script>
+
+<!-- <div class="confetti" style="left: 30vw;background-color: #f00;width: 10px;height: 10px;animation-duration: 2.6s;"></div> -->
+    
+
 </body>
 </html>
