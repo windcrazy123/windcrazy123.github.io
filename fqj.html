@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父亲节快乐！</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 20px;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 90%, rgba(255,255,255,0.1) 0%, transparent 20%);
+            pointer-events: none;
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(13, 19, 33, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+            padding: 20px;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+        
+        .title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #f0f8ff;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        .dad-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid #4facfe;
+            margin: 30px auto;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #2193b0, #6dd5ed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+        }
+        
+        .heart-animation {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="red" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: heartbeat 1.2s infinite;
+            opacity: 0.7;
+            z-index: -1;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            25% { transform: translate(-50%, -50%) scale(1.1); }
+            50% { transform: translate(-50%, -50%) scale(1); }
+            75% { transform: translate(-50%, -50%) scale(1.15); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        .content-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 20px;
+        }
+        
+        .section {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-10px);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #4facfe;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .memories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .memory-item {
+            height: 120px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease;
+            background: linear-gradient(45deg, #2193b0, #6dd5ed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .memory-item:hover {
+            transform: scale(1.1);
+            z-index: 2;
+        }
+        
+        .memory-item:nth-child(2n) {
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+        }
+        
+        .memory-item:nth-child(3n) {
+            background: linear-gradient(45deg, #56ab2f, #a8e063);
+        }
+        
+        .message-input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            resize: none;
+            height: 120px;
+        }
+        
+        .message-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 126, 95, 0.6);
+        }
+        
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        
+        .game-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #5c6bc0, #3949ab);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            transform: rotateY(180deg);
+        }
+        
+        .game-card.flipped {
+            transform: rotateY(0deg);
+            background: linear-gradient(135deg, #ffb74d, #ff9800);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 20px;
+        }
+        
+        .signature {
+            display: inline-block;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #ff7e5f;
+            margin-top: 10px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .content-section {
+                flex-direction: column;
+            }
+            
+            .section {
+                min-width: 100%;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .bounce {
+            animation: bounce 0.5s ease infinite alternate;
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-15px); }
+        }
+        
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #ff7e5f, #feb47b);
+            border-radius: 5px;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            animation: fall linear forwards;
+            z-index: 1000;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-animation"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="title floating">父亲节快乐！</h1>
+            <p class="subtitle">感谢您一直以来的付出、关爱和支持。您是我生命中最重要的人！</p>
+            
+            <div class="dad-image">
+                <i class="fas fa-user-tie bounce"></i>
+            </div>
+            
+            <p class="subtitle">在这个特别的日子里，我想告诉您：我永远爱您！</p>
+        </div>
+        
+        <div class="content-section">
+            <!-- <div class="section">
+                <h2 class="section-title"><i class="fas fa-heart"></i> 我们的回忆</h2>
+                <p></p>
+                <#2!-- <p>点击照片查看我们的美好回忆：</p> #2
+                
+                <#1!-- <div class="memories">
+                    <div class="memory-item" onclick="showMemory(1)"><i class="fas fa-camera"></i></div>
+                    <div class="memory-item" onclick="showMemory(2)"><i class="fas fa-car"></i></div>
+                    <div class="memory-item" onclick="showMemory(3)"><i class="fas fa-futbol"></i></div>
+                    <div class="memory-item" onclick="showMemory(4)"><i class="fas fa-utensils"></i></div>
+                    <div class="memory-item" onclick="showMemory(5)"><i class="fas fa-tree"></i></div>
+                    <div class="memory-item" onclick="showMemory(6)"><i class="fas fa-graduation-cap"></i></div>
+                </div> #1
+            </div> -->
+            
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-gift"></i> 专属祝福</h2>
+                <p>写下您想对爸爸说的话：</p>
+                
+                <textarea class="message-input" placeholder="亲爱的爸爸..."></textarea>
+                
+                <button class="btn" onclick="generateCard()">生成祝福卡片</button>
+                
+                <div id="cardPreview" style="margin-top: 20px; display: none; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                    <h3>给最爱的爸爸：</h3>
+                    <p id="cardMessage"></p>
+                    <p style="text-align: right; margin-top: 15px;">爱您的孩子</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-gamepad"></i> 父亲节小游戏</h2>
+            <p>配对成功向爸爸表达爱意！</p>
+            
+            <div class="game-container">
+                <div class="game-board" id="gameBoard">
+                    <!-- 游戏卡片由JS生成 -->
+                </div>
+                <button class="btn" onclick="resetGame()" style="margin-top: 20px;">重新开始</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>祝全天下的父亲节日快乐！</p>
+        <p class="signature">爱您的孩子</p>
+    </div>
+
+    <script>
+        // 回忆展示功能
+        function showMemory(id) {
+            const memories = [
+                "我们一起旅行的美好时光",
+                "您教我开车的那段日子",
+                "公园里踢足球的快乐周末",
+                "您最拿手的红烧肉味道",
+                "每年夏天的家庭野营",
+                "您参加我毕业典礼时的骄傲笑容"
+            ];
+            
+            alert(memories[id-1]);
+        }
+        
+        // 生成祝福卡片
+        function generateCard() {
+            const messageInput = document.querySelector('.message-input');
+            const cardPreview = document.getElementById('cardPreview');
+            const cardMessage = document.getElementById('cardMessage');
+            
+            if(messageInput.value.trim() === "") {
+                alert("请写下您想对爸爸说的话！");
+                return;
+            }
+            
+            cardMessage.innerText = messageInput.value;
+            cardPreview.style.display = "block";
+            
+            // 创建彩色纸屑效果
+            createConfetti();
+        }
+        
+        // 创建彩色纸屑
+        function createConfetti() {
+            const colors = ['#ff7e5f', '#feb47b', '#4facfe', '#00cdac', '#f6d365', '#a8e063'];
+            
+            for (let i = 0; i < 150; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                document.body.appendChild(confetti);
+                
+                // 动画结束后移除元素
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+        
+        // 记忆游戏逻辑
+        const gameIcons = ['👨', '👕', '🚗', '⚽', '🍔', '📚', '🎮', '🏠'];
+        let gameCards = [...gameIcons, ...gameIcons];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        
+        // 初始化游戏
+        function initGame() {
+            const gameBoard = document.getElementById('gameBoard');
+            gameBoard.innerHTML = '';
+            
+            // 洗牌算法
+            gameCards.sort(() => Math.random() - 0.5);
+            
+            gameCards.forEach((icon, index) => {
+                const card = document.createElement('div');
+                card.className = 'game-card';
+                card.innerHTML = `<span>${icon}</span>`;
+                card.dataset.index = index;
+                card.addEventListener('click', flipCard);
+                gameBoard.appendChild(card);
+            });
+        }
+        
+        // 翻转卡片
+        function flipCard() {
+            if (flippedCards.length < 2 && !this.classList.contains('flipped')) {
+                this.classList.add('flipped');
+                flippedCards.push(this);
+                
+                if (flippedCards.length === 2) {
+                    setTimeout(checkMatch, 500);
+                }
+            }
+        }
+        
+        // 检查是否匹配
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            const icon1 = card1.querySelector('span').textContent;
+            const icon2 = card2.querySelector('span').textContent;
+            
+            if (icon1 === icon2) {
+                card1.style.visibility = 'hidden';
+                card2.style.visibility = 'hidden';
+                matchedPairs++;
+                
+                if (matchedPairs === gameIcons.length) {
+                    setTimeout(() => {
+                        alert("恭喜您完成了游戏！父亲节快乐！");
+                    }, 300);
+                }
+            } else {
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+            }
+            
+            flippedCards = [];
+        }
+        
+        // 重置游戏
+        function resetGame() {
+            matchedPairs = 0;
+            flippedCards = [];
+            initGame();
+        }
+        
+        // 页面加载完成后初始化游戏
+        document.addEventListener('DOMContentLoaded', initGame);
+        
+        // 添加一些动画效果
+        document.querySelectorAll('.memory-item').forEach(item => {
+            item.style.animationDelay = Math.random() * 0.5 + 's';
+        });
+    </script>
+</body>
+</html>
