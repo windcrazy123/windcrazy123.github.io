@@ -512,19 +512,34 @@
                     <div class="memory-item" onclick="showMemory(6)"><i class="fas fa-graduation-cap"></i></div>
                 </div> #1
             </div> -->
-            
+
             <div class="section" id="confettiCreate">
-                <h2 class="section-title"><i class="fas fa-gift"></i> 专属祝福</h2>
+                <h2 class="section-title"><i class="fas fa-gift"></i> 刘本栋的专属祝福</h2>
                 <p>父亲节快乐！</p>
                 
-                <textarea class="message-input" placeholder="亲爱的爸爸父亲节快乐！">亲爱的爸爸，父亲节快乐！祝您没有烦恼，天天开心！</textarea>
+                <textarea id="message-input1" class="message-input" placeholder="亲爱的爸爸父亲节快乐！">亲爱的爸爸，父亲节快乐！祝您没有烦恼，天天开心！</textarea>
                 
-                <button class="btn" onclick="generateCard()">生成祝福卡片</button>
+                <button class="btn" onclick="generateCard1()">生成祝福卡片</button>
                 
-                <div id="cardPreview" style="margin-top: 20px; display: none; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                <div id="cardPreview1" style="margin-top: 20px; display: none; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
                     <h3>给最爱的爸爸-刘刚：</h3>
-                    <p id="cardMessage"></p>
+                    <p id="cardMessage1"></p>
                     <p style="text-align: right; margin-top: 15px;">爱您的孩子-刘本栋</p>
+                </div>
+            </div>
+            
+            <div class="section" id="confettiCreate">
+                <h2 class="section-title"><i class="fas fa-gift"></i> 刘子旖的专属祝福</h2>
+                <p>父亲节快乐！</p>
+                
+                <textarea id="message-input2" class="message-input" placeholder="亲爱的爸爸父亲节快乐！">爸爸节日快乐 我一直在您的庇护下长大切身感受到父爱如山的含义 希望以后您能多点闲暇少点疲惫 一切都无忧顺遂</textarea>
+                
+                <button class="btn" onclick="generateCard2()">生成祝福卡片</button>
+                
+                <div id="cardPreview2" style="margin-top: 20px; display: none; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                    <h3>给最爱的爸爸-刘刚：</h3>
+                    <p id="cardMessage2"></p>
+                    <p style="text-align: right; margin-top: 15px;">爱您的孩子-刘子旖</p>
                 </div>
             </div>
         </div>
@@ -543,7 +558,7 @@
 
         <div class="section">
             <h2 class="section-title"><i class="fas fa-gamepad"></i> 父亲节记忆游戏</h2>
-            <p>找到所有匹配的卡片，向爸爸表达爱意！</p>
+            <p>找到所有匹配的卡片，完成有我的祝福哦！</p>
             
             <div class="game-container">
                 <div class="game-header">
@@ -590,10 +605,28 @@
         }
         
         // 生成祝福卡片
-        function generateCard() {
-            const messageInput = document.querySelector('.message-input');
-            const cardPreview = document.getElementById('cardPreview');
-            const cardMessage = document.getElementById('cardMessage');
+        function generateCard1() {
+            // const messageInput = document.querySelector('.message-input');
+            const messageInput = document.getElementById('message-input1');
+            const cardPreview = document.getElementById('cardPreview1');
+            const cardMessage = document.getElementById('cardMessage1');
+            
+            if(messageInput.value.trim() === "") {
+                alert("哈哈哈，你怎么把我的话删了");
+                return;
+            }
+            
+            cardMessage.innerText = messageInput.value;
+            cardPreview.style.display = "block";
+            
+            // 创建彩色纸屑效果
+            createConfetti();
+        }
+        function generateCard2() {
+            // const messageInput = document.querySelector('.message-input');
+            const messageInput = document.getElementById('message-input2');
+            const cardPreview = document.getElementById('cardPreview2');
+            const cardMessage = document.getElementById('cardMessage2');
             
             if(messageInput.value.trim() === "") {
                 alert("哈哈哈，你怎么把我的话删了");
