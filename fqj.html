@@ -121,30 +121,40 @@
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
-            padding: 20px;
+            padding: 40px;
         }
         
         .section {
             flex: 1;
             min-width: 300px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 15px;
-            padding: 25px;
+            padding: 30px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         .section:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.12);
         }
         
         .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: #4facfe;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: var(--accent);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            font-weight: 600;
+        }
+        
+        .section-title i {
+            font-size: 1.8rem;
         }
         
         .memories {
@@ -225,32 +235,122 @@
             padding: 20px;
         }
         
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 25px;
+        }
+        
+        .game-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
         .game-board {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            gap: 15px;
             width: 100%;
-            max-width: 400px;
-            margin: 20px auto;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
         .game-card {
             aspect-ratio: 1;
-            background: linear-gradient(135deg, #5c6bc0, #3949ab);
-            border-radius: 10px;
+            background: linear-gradient(135deg, #2c5c8a, #1a3a5f);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            perspective: 1000px;
             transform-style: preserve-3d;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        /* .game-card.flipped {
+            transform: rotateY(0deg);
+            background: linear-gradient(135deg, #ffb74d, #ff9800);
+        } */
+
+        .game-card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        
+        .card-front {
+            background: linear-gradient(135deg, #ff9e1b, #ffb347);
             transform: rotateY(180deg);
         }
         
-        .game-card.flipped {
-            transform: rotateY(0deg);
-            background: linear-gradient(135deg, #ffb74d, #ff9800);
+        .card-back {
+            background: linear-gradient(135deg, #1a3a5f, #2c5c8a);
+        }
+        
+        .card-back::before {
+            content: "?";
+            font-size: 3rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .game-card.matched {
+            transform: scale(0.95);
+            opacity: 0.7;
+            cursor: default;
+        }
+        
+        .game-controls {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .controls-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .controls-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
         
         .footer {
@@ -281,10 +381,52 @@
             
             .content-section {
                 flex-direction: column;
+                padding: 30px;
             }
             
             .section {
                 min-width: 100%;
+            }
+        }
+        @media (max-width: 600px) {
+            header {
+                padding: 40px 20px;
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .dad-avatar {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .dad-avatar i {
+                font-size: 4.5rem;
+            }
+            
+            .game-board {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .memories {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 12px;
+            }
+            
+            .memory-item {
+                height: 100px;
+                font-size: 2.2rem;
             }
         }
         
@@ -426,7 +568,7 @@
     </div>
     
     <div class="footer">
-        <p>祝全天下的父亲节日快乐！</p>
+        <p>祝您父亲节快乐！</p>
         <p class="signature">爱您的孩子</p><p></p>
         <p class="signature">刘本栋</p>
         <p class="signature">刘子旖</p>
@@ -602,7 +744,7 @@
                 if (matchedPairs === gameIcons.length) {
                     clearInterval(timerInterval);
                     setTimeout(() => {
-                        alert(`恭喜您完成了游戏！用时 ${document.getElementById('timer').textContent}\n爸爸一定会为您的聪明感到骄傲！`);
+                        alert(`恭喜您完成了游戏！用时 ${document.getElementById('timer').textContent}\n祝您天天开心😊！`);
                     }, 500);
                 }
             } else {
