@@ -5,24 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>父亲节快乐！</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #1a3a5f;
+            --secondary: #2c5c8a;
+            --accent: #ff9e1b;
+            --light: #f8f9fa;
+            --dark: #0e2433;
+            --success: #4CAF50;
         }
         
         body {
-            background: linear-gradient(135deg, #1a2980, #0c5986);
-            color: #fff;
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #0e2433, #1a3a5f);
+            color: var(--light);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            overflow-x: hidden;
             padding: 20px;
+            overflow-x: hidden;
             position: relative;
         }
         
@@ -34,65 +43,93 @@
             width: 100%;
             height: 100%;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.1) 0%, transparent 20%),
-                radial-gradient(circle at 80% 90%, rgba(255,255,255,0.1) 0%, transparent 20%);
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 80% 90%, rgba(255, 255, 255, 0.05) 0%, transparent 20%);
             pointer-events: none;
+            z-index: -1;
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             width: 100%;
-            background: rgba(13, 19, 33, 0.85);
+            background: rgba(20, 40, 60, 0.85);
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             overflow: hidden;
             position: relative;
-            padding: 20px;
             z-index: 10;
             backdrop-filter: blur(10px);
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .header {
+        header {
             text-align: center;
-            padding: 40px 20px;
+            padding: 50px 30px 30px;
+            background: linear-gradient(135deg, var(--primary), #143252);
             position: relative;
+            overflow: hidden;
         }
         
-        .title {
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        h1 {
             font-size: 4.5rem;
             font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #ffb347, #ffcc33);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            font-family: 'Dancing Script', cursive;
+            animation: float 3s ease-in-out infinite;
         }
         
         .subtitle {
             font-size: 1.8rem;
-            margin-bottom: 30px;
-            color: #f0f8ff;
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto 30px;
             line-height: 1.6;
+            color: #e0f7ff;
+            font-weight: 300;
         }
         
-        .dad-image {
+        .dad-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .dad-avatar {
             width: 180px;
             height: 180px;
             border-radius: 50%;
-            border: 5px solid #4facfe;
-            margin: 30px auto;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(45deg, #2193b0, #6dd5ed);
+            border: 5px solid var(--accent);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 5rem;
-            color: white;
+            background: linear-gradient(45deg, #2c5c8a, #1a3a5f);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .dad-avatar i {
+            font-size: 6rem;
+            color: rgba(255, 255, 255, 0.9);
+            animation: bounce 2s ease infinite;
         }
         
         .heart-animation {
@@ -102,75 +139,79 @@
             transform: translate(-50%, -50%);
             width: 200px;
             height: 200px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="red" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') no-repeat center;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23ff6b6b" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') no-repeat center;
             background-size: contain;
             animation: heartbeat 1.2s infinite;
             opacity: 0.7;
             z-index: -1;
         }
         
-        @keyframes heartbeat {
-            0% { transform: translate(-50%, -50%) scale(1); }
-            25% { transform: translate(-50%, -50%) scale(1.1); }
-            50% { transform: translate(-50%, -50%) scale(1); }
-            75% { transform: translate(-50%, -50%) scale(1.15); }
-            100% { transform: translate(-50%, -50%) scale(1); }
-        }
-        
         .content-section {
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
-            padding: 20px;
+            padding: 40px;
         }
         
         .section {
             flex: 1;
             min-width: 300px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 15px;
-            padding: 25px;
+            padding: 30px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         .section:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.12);
         }
         
         .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: #4facfe;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: var(--accent);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            font-weight: 600;
+        }
+        
+        .section-title i {
+            font-size: 1.8rem;
         }
         
         .memories {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 18px;
             margin-top: 20px;
         }
         
         .memory-item {
-            height: 120px;
-            border-radius: 10px;
+            height: 130px;
+            border-radius: 12px;
             overflow: hidden;
             cursor: pointer;
             position: relative;
-            transition: transform 0.3s ease;
-            background: linear-gradient(45deg, #2193b0, #6dd5ed);
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, #2c5c8a, #1a3a5f);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         .memory-item:hover {
-            transform: scale(1.1);
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             z-index: 2;
         }
         
@@ -182,40 +223,61 @@
             background: linear-gradient(45deg, #56ab2f, #a8e063);
         }
         
+        .memory-item:nth-child(4n) {
+            background: linear-gradient(45deg, #8E2DE2, #4A00E0);
+        }
+        
         .message-input {
             width: 100%;
-            padding: 15px;
-            border-radius: 10px;
+            padding: 18px;
+            border-radius: 12px;
             border: none;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1);
             color: white;
             font-size: 1.1rem;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             resize: none;
-            height: 120px;
+            height: 150px;
+            font-family: inherit;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .message-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 158, 27, 0.3);
         }
         
         .message-input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
         }
         
         .btn {
             display: inline-block;
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            background: linear-gradient(to right, var(--accent), #ffb347);
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 14px 35px;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+            box-shadow: 0 5px 15px rgba(255, 158, 27, 0.4);
+            font-family: inherit;
         }
         
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 126, 95, 0.6);
+            box-shadow: 0 8px 20px rgba(255, 158, 27, 0.6);
+            background: linear-gradient(to right, #ffaa2b, #ffc14d);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 10px rgba(255, 158, 27, 0.4);
         }
         
         .game-container {
@@ -225,74 +287,192 @@
             padding: 20px;
         }
         
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 25px;
+        }
+        
+        .game-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
         .game-board {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            gap: 15px;
             width: 100%;
-            max-width: 400px;
-            margin: 20px auto;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
         .game-card {
             aspect-ratio: 1;
-            background: linear-gradient(135deg, #5c6bc0, #3949ab);
-            border-radius: 10px;
+            background: linear-gradient(135deg, #2c5c8a, #1a3a5f);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            perspective: 1000px;
             transform-style: preserve-3d;
+        }
+        
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .game-card.flipped .card-inner {
             transform: rotateY(180deg);
         }
         
-        .game-card.flipped {
-            transform: rotateY(0deg);
-            background: linear-gradient(135deg, #ffb74d, #ff9800);
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
         }
         
-        .footer {
-            text-align: center;
-            padding: 30px 20px;
+        .card-front {
+            background: linear-gradient(135deg, #ff9e1b, #ffb347);
+            transform: rotateY(180deg);
+        }
+        
+        .card-back {
+            background: linear-gradient(135deg, #1a3a5f, #2c5c8a);
+        }
+        
+        .card-back::before {
+            content: "?";
+            font-size: 3rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .game-card.matched {
+            transform: scale(0.95);
+            opacity: 0.7;
+            cursor: default;
+        }
+        
+        .game-controls {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+        
+        .controls-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .controls-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .card-preview {
+            margin-top: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            display: none;
+            width: 100%;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .card-preview h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        .card-preview p {
             font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 20px;
+            line-height: 1.8;
+            margin-bottom: 15px;
         }
         
         .signature {
-            display: inline-block;
+            text-align: right;
             font-family: 'Dancing Script', cursive;
             font-size: 2.2rem;
-            color: #ff7e5f;
+            color: var(--accent);
             margin-top: 10px;
         }
         
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .title {
-                font-size: 3rem;
-            }
-            
-            .subtitle {
-                font-size: 1.4rem;
-            }
-            
-            .content-section {
-                flex-direction: column;
-            }
-            
-            .section {
-                min-width: 100%;
-            }
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+        }
+        
+        .footer-text {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        .signature-footer {
+            display: inline-block;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-top: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
         
         /* 动画效果 */
+        @keyframes heartbeat {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            25% { transform: translate(-50%, -50%) scale(1.1); }
+            50% { transform: translate(-50%, -50%) scale(1); }
+            75% { transform: translate(-50%, -50%) scale(1.15); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
             100% { transform: translateY(0px); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
         
         .floating {
@@ -300,26 +480,85 @@
         }
         
         .bounce {
-            animation: bounce 0.5s ease infinite alternate;
+            animation: bounce 2s ease infinite;
         }
         
-        @keyframes bounce {
-            from { transform: translateY(0); }
-            to { transform: translateY(-15px); }
+        /* 响应式设计 */
+        @media (max-width: 900px) {
+            .content-section {
+                flex-direction: column;
+                padding: 30px;
+            }
+            
+            .section {
+                min-width: 100%;
+            }
+            
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            header {
+                padding: 40px 20px;
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .dad-avatar {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .dad-avatar i {
+                font-size: 4.5rem;
+            }
+            
+            .game-board {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .memories {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 12px;
+            }
+            
+            .memory-item {
+                height: 100px;
+                font-size: 2.2rem;
+            }
         }
         
         /* 自定义滚动条 */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 12px;
         }
         
         ::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
         
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, #ff7e5f, #feb47b);
-            border-radius: 5px;
+            background: linear-gradient(to bottom, var(--accent), #ffb347);
+            border-radius: 10px;
+            border: 3px solid rgba(0, 0, 0, 0.1);
         }
         
         .confetti {
@@ -333,7 +572,7 @@
         
         @keyframes fall {
             to {
-                transform: translateY(100vh);
+                transform: translateY(100vh) rotate(360deg);
                 opacity: 0;
             }
         }
@@ -343,62 +582,50 @@
     <div class="heart-animation"></div>
     
     <div class="container">
-        <div class="header">
-            <h1 class="title floating">父亲节快乐！</h1>
+        <header>
+            <h1>父亲节快乐！</h1>
             <p class="subtitle">感谢您一直以来的付出、关爱和支持。您是我生命中最重要的人！</p>
             
-            <div class="dad-image">
-                <!-- <i class="fas fa-user-tie bounce"></i> -->
-                 <img src="https://windcrazy123.github.io/styles/images/fqj.jpg" width="180" height="180"/>
+            <div class="dad-container">
+                <div class="dad-avatar">
+                    <i class="fas fa-user-tie bounce"></i>
+                </div>
             </div>
             
             <p class="subtitle">在这个特别的日子里，我想告诉您：我永远爱您！</p>
-        </div>
+        </header>
         
         <div class="content-section">
-            <!-- <div class="section">
+            <div class="section">
                 <h2 class="section-title"><i class="fas fa-heart"></i> 我们的回忆</h2>
-                <p></p>
-                <#2!-- <p>点击照片查看我们的美好回忆：</p> #2
+                <p>点击照片查看我们的美好回忆：</p>
                 
-                <#1!-- <div class="memories">
+                <div class="memories">
                     <div class="memory-item" onclick="showMemory(1)"><i class="fas fa-camera"></i></div>
                     <div class="memory-item" onclick="showMemory(2)"><i class="fas fa-car"></i></div>
                     <div class="memory-item" onclick="showMemory(3)"><i class="fas fa-futbol"></i></div>
                     <div class="memory-item" onclick="showMemory(4)"><i class="fas fa-utensils"></i></div>
                     <div class="memory-item" onclick="showMemory(5)"><i class="fas fa-tree"></i></div>
                     <div class="memory-item" onclick="showMemory(6)"><i class="fas fa-graduation-cap"></i></div>
-                </div> #1
-            </div> -->
+                </div>
+            </div>
             
-            <div class="section" id="confettiCreate">
+            <div class="section">
                 <h2 class="section-title"><i class="fas fa-gift"></i> 专属祝福</h2>
-                <p>父亲节快乐！</p>
+                <p>写下您想对爸爸说的话：</p>
                 
-                <textarea class="message-input" placeholder="亲爱的爸爸父亲节快乐！">亲爱的爸爸，父亲节快乐！祝您没有烦恼，天天开心！</textarea>
+                <textarea class="message-input" placeholder="亲爱的爸爸，我想对您说..."></textarea>
                 
-                <button class="btn" onclick="generateCard()">生成祝福卡片</button>
+                <button class="btn" onclick="generateCard()"><i class="fas fa-paper-plane"></i> 生成祝福卡片</button>
                 
-                <div id="cardPreview" style="margin-top: 20px; display: none; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
-                    <h3>给最爱的爸爸-刘刚：</h3>
+                <div class="card-preview" id="cardPreview">
+                    <h3>给最爱的爸爸：</h3>
                     <p id="cardMessage"></p>
-                    <p style="text-align: right; margin-top: 15px;">爱您的孩子-刘本栋</p>
+                    <div class="signature">爱您的孩子</div>
                 </div>
             </div>
         </div>
         
-        <!-- <div class="section">
-            <h2 class="section-title"><i class="fas fa-gamepad"></i> 父亲节小游戏</h2>
-            <p>配对成功向您表达爱意！</p>
-            
-            <div class="game-container">
-                <div class="game-board" id="gameBoard">
-                    <!#1-- 游戏卡片由JS生成 -#1->
-                </div>
-                <button class="btn" onclick="resetGame()" style="margin-top: 20px;">重新开始</button>
-            </div>
-        </div> -->
-
         <div class="section">
             <h2 class="section-title"><i class="fas fa-gamepad"></i> 父亲节记忆游戏</h2>
             <p>找到所有匹配的卡片，向爸爸表达爱意！</p>
@@ -425,26 +652,33 @@
         </div>
     </div>
     
-    <div class="footer">
-        <p>祝全天下的父亲节日快乐！</p>
-        <p class="signature">爱您的孩子</p><p></p>
-        <p class="signature">刘本栋</p>
-        <p class="signature">刘子旖</p>
-    </div>
+    <footer>
+        <div class="footer-text">
+            <p>父亲的爱如山般深沉，如海般宽广。感谢您一直以来的付出与支持。</p>
+            <p>祝全天下的父亲节日快乐，健康幸福！</p>
+            <div class="signature-footer">爱您的孩子</div>
+        </div>
+    </footer>
 
     <script>
         // 回忆展示功能
         function showMemory(id) {
             const memories = [
-                "我们一起旅行的美好时光",
-                "您教我开车的那段日子",
-                "公园里踢足球的快乐周末",
-                "您最拿手的红烧肉味道",
-                "每年夏天的家庭野营",
-                "您参加我毕业典礼时的骄傲笑容"
+                "我们一起旅行的美好时光，那些风景因您而更美",
+                "您教我开车的那段日子，耐心教导让我终生难忘",
+                "公园里踢足球的快乐周末，您的笑声是最动听的音乐",
+                "您最拿手的红烧肉味道，那是世界上最美味的食物",
+                "每年夏天的家庭野营，星空下的故事温暖我心",
+                "您参加我毕业典礼时的骄傲笑容，那是我最大的动力"
             ];
             
-            alert(memories[id-1]);
+            // 添加动画效果
+            const item = document.querySelectorAll('.memory-item')[id-1];
+            item.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                item.style.transform = 'scale(1)';
+                alert(memories[id-1]);
+            }, 300);
         }
         
         // 生成祝福卡片
@@ -454,12 +688,16 @@
             const cardMessage = document.getElementById('cardMessage');
             
             if(messageInput.value.trim() === "") {
-                alert("哈哈哈，你怎么把我的话删了");
+                alert("请写下您想对爸爸说的话！");
+                messageInput.focus();
                 return;
             }
             
             cardMessage.innerText = messageInput.value;
             cardPreview.style.display = "block";
+            
+            // 滚动到卡片位置
+            cardPreview.scrollIntoView({ behavior: 'smooth' });
             
             // 创建彩色纸屑效果
             createConfetti();
@@ -467,40 +705,25 @@
         
         // 创建彩色纸屑
         function createConfetti() {
-            //removeConfetti();
-            const colors = ['#ff7e5f', '#feb47b', '#4facfe', '#00cdac', '#f6d365', '#a8e063'];
+            const colors = ['#ff9e1b', '#ff6b6b', '#4facfe', '#00cdac', '#f6d365', '#a8e063'];
             
-            for (let i = 0; i < 150; i++) {
+            for (let i = 0; i < 200; i++) {
                 const confetti = document.createElement('div');
-                const OnTest = document.getElementById("confettiCreate")
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + 'vw';
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 confetti.style.width = Math.random() * 10 + 5 + 'px';
                 confetti.style.height = Math.random() * 10 + 5 + 'px';
                 confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
-                //confetti.innerText = 'adhfahgg'
-
-                // document.body.appendChild(confetti);
-                OnTest.appendChild(confetti);
+                document.body.appendChild(confetti);
                 
                 // 动画结束后移除元素
-                // setTimeout(() => {
-                //     confetti.remove();
-                // }, 5000);
-                
-
-            }
-            setTimeout("removeConfetti()",5000 );  
-        }
-        function removeConfetti(){  
-            const confetti = document.getElementsByClassName('confetti');
-            for (let index = 0; index < confetti.length*2; index++) {
-                const element = confetti[index];
-                element.remove();
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
             }
         }
-
+        
         // 记忆游戏逻辑
         const gameIcons = ['👨', '👕', '🚗', '⚽', '🍔', '📚', '🎮', '🏠'];
         let gameCards = [...gameIcons, ...gameIcons];
@@ -648,9 +871,5 @@
             item.style.animationDelay = Math.random() * 0.5 + 's';
         });
     </script>
-
-<!-- <div class="confetti" style="left: 30vw;background-color: #f00;width: 10px;height: 10px;animation-duration: 2.6s;"></div> -->
-    
-
 </body>
 </html>
