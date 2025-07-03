@@ -17,3 +17,5 @@ tag: 基础
 # 参考链接
 
 > 1，[【UE4 C++ 基础知识】<15> 智能指针 TSharedPtr、UniquePtr、TWeakPtr、TSharedRef](https://www.cnblogs.com/shiroe/p/14729821.html)
+>
+> 2，[UE4的智能指针 TSharedPtr](https://cloud.tencent.com/developer/article/1897038)
