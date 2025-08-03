@@ -16,7 +16,15 @@ tag: Misc
 
 ![](/styles/images/Rider/UESouceCodeRider.png)
 
-完毕后如果在UE中无法关联Rider，请查看：https://www.cnblogs.com/chevin/p/16083202.html
+解决办法：在UE安装路径下的RiderLocations.txt文件中修改或增加Rider最新路径即可。
+
+```
+Epic Games\UE_4.27\Engine\Plugins\Developer\RiderSourceCodeAccess\Resources\RiderLocations.txt
+```
+
+> 参考：https://www.cnblogs.com/chevin/p/16083202.html
+>
+> 官方传送门：[No Rider IDE option in UE 4.27.1](https://rider-support.jetbrains.com/hc/en-us/community/posts/4410229042066-No-Rider-IDE-option-in-UE-4-27-1)
 
 # 二、'RiderLink' failed to load because module ‘RD’ couldn't be loaded
 
