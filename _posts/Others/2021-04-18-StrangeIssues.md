@@ -28,6 +28,8 @@ tag: Issues
 
 # 三、Microsoft.MakeFile.targets(44, 5): [MSB3073]
 
+## 代码为6
+
 > 问题参考与解决办法：[how can i solve Microsoft.MakeFile.targets(44, 5): MSB3073](https://forums.unrealengine.com/t/how-can-i-solve-microsoft-makefile-targets-44-5-msb3073/915780)
 
 使用编译环境：
@@ -55,6 +57,26 @@ Saved
 .vsconfig
 NetworkTeaching.sln
 ```
+
+## 代码为8
+
+同上述编译环境
+
+编译报错：
+
+```ABAP
+28>Expecting to find a type to be declared in a module rules named 'HoudiniEngine' in 'UE5Rules, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.  This type must derive from the 'ModuleRules' type defined by UnrealBuildTool.
+28>D:\VS\VS\MSBuild\Microsoft\VC\v170\Microsoft.MakeFile.Targets(44,5): error MSB3073: 命令“D:\UE\UE_5.4\Engine\Build\BatchFiles\Build.bat WemakeMarsMREditor Win64 DebugGame -Project="E:\Work\2025\MR_mars1\WemakeMarsMR.uproject" -WaitMutex -FromMsBuild -architecture=x64”已退出，代码为 8。
+28>已完成生成项目“WemakeMarsMR.vcxproj”的操作 - 失败。
+```
+
+解决方法：`HoudiniEngine`插件不能放在UE5的Engine文件夹中,可以放在项目的插件中。
+
+之前RiderLink也出现过这种问题
+
+> 参考链接：[HoudiniEngine在UE5中创建C++工程时会报错](https://zhuanlan.zhihu.com/p/539734936)
+>
+> [UE5 Rider编译项目 RD报错](https://zhuanlan.zhihu.com/p/11329869625)
 
 # 四、BuildGraph.AutoMation报错
 
@@ -118,3 +140,48 @@ Failed to generate project model definition files for 'Configuration: Developmen
 > 2，下载appxbundle后缀的安装包双击安装就可以了
 
 > 参考：[Image and video codecs and import formats](https://dev.epicgames.com/community/learning/knowledge-base/yzP1/capturing-reality-image-and-video-codecs-and-import-formats)
+
+# 九、使用5.2.1时启用OpenXR崩溃
+
+> 问题详情与解决方案：[Crash when opening project on 5.2.1 with OpenXR plugin enabled](https://forums.unrealengine.com/t/crash-when-opening-project-on-5-2-1-with-openxr-plugin-enabled/1238892)
+
+使用5.2.1时启动游戏崩溃并报错：`Assertion failed: ((Result) >= 0)[File:D:\build++UE5\Sync\Engine\Plugins\Runtime\OpenXR\Source\OpenXRHMD\Private\OpenXRCore.cpp] [Line: 24]`
+
+使用 [OpenXR Explorer](https://github.com/maluoi/openxr-explorer)设置一下 `OpenXR runtime`，如图
+
+![](D:\WindCrazyGithubio\windcrazy123.github.io\styles\images\Other\OpenXRExplorer.png)
+
+# 十、Source package referenced an object in target package but the target package was marked NeverCook or is not cookable for the target platform.
+
+```ABAP
+UATHelper: Packaging (Android (ASTC)): LogCook: Error: Content is missing from cook. Source package referenced an object in target package but the target package was marked NeverCook or is not cookable for the target platform.
+PackagingResults: Error: Content is missing from cook. Source package referenced an object in target package but the target package was marked NeverCook or is not cookable for the target platform.
+UATHelper: Packaging (Android (ASTC)):     Source package: /Game/LV01_02/Art/SciFiIndustrialBase/Materials/MI_Blue_Decals
+UATHelper: Packaging (Android (ASTC)):     Target package: /Bridge/MSPresets/M_MS_Glass_Material/Textures/White
+UATHelper: Packaging (Android (ASTC)):     Referenced object: /Bridge/MSPresets/M_MS_Glass_Material/Textures/White.White
+```
+
+原因就是Bridge的`SupportedTargetPlatforms`没有"Android"这一项，现在加上就ok了
+
+```xml
+"SupportedTargetPlatforms": [
+		"Win64",
+		"Mac",
+		"Linux",
+		"Android"
+	],
+```
+
+# 十一、屏幕时不时闪黑，UE右键菜单栏不显示
+
+> 参考：[关闭OverlayTestMode，终于解决困扰了我好久游戏切换浏览器卡死掉驱动的问题](https://ngabbs.com/read.php?tid=44051581&rand=20)
+
+注册表：
+
+```ini
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm]
+"OverlayTestMode"=dword:00000005
+```
+
