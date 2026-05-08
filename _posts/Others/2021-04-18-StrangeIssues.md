@@ -185,3 +185,50 @@ Windows Registry Editor Version 5.00
 "OverlayTestMode"=dword:00000005
 ```
 
+# 十二、CmdLink编译报错LNK2001:unresolved external symbol
+
+具体报错信息：
+
+```ASN.1
+8>Module.Core.13.cpp.obj: Error  : LNK2001: unresolved external symbol "wchar_t * GInternalProjectName" (?GInternalProjectName@@3PA_WA)
+8>Module.Core.3.cpp.obj: Error  : LNK2001: unresolved external symbol "wchar_t * GInternalProjectName" (?GInternalProjectName@@3PA_WA)
+8>Module.Core.8.cpp.obj: Error  : LNK2001: unresolved external symbol "wchar_t * GInternalProjectName" (?GInternalProjectName@@3PA_WA)
+8>Module.Core.9.cpp.obj: Error  : LNK2001: unresolved external symbol "wchar_t * GInternalProjectName" (?GInternalProjectName@@3PA_WA)
+8>Module.Core.10.cpp.obj: Error  : LNK2001: unresolved external symbol "wchar_t * GInternalProjectName" (?GInternalProjectName@@3PA_WA)
+8>Module.Core.3.cpp.obj: Error  : LNK2001: unresolved external symbol "wchar_t const * const GForeignEngineDir" (?GForeignEngineDir@@3PEB_WEB)
+8>CmdLink.exe: Error  : LNK1120: 2 unresolved externals
+```
+
+> 参考：[虚幻论坛](https://forums.unrealengine.com/t/lnk2001-unresolved-external-symbal-wchar-t/1876262/7)
+
+我们只需要在CmdLink.cpp头文件引用下方添加
+
+```cpp
+#if !defined(UE_PROJECT_NAME)
+TCHAR GInternalProjectName[64] = TEXT("CmdLink");
+#else
+TCHAR GInternalProjectName[64] = TEXT(PREPROCESSOR_TO_STRING(UE_PROJECT_NAME));
+#endif
+IMPLEMENT_FOREIGN_ENGINE_DIR()
+```
+
+# 十三、UE着色器编译CPU跑不满
+
+在BaseEngine.ini中将PercentageUnusedShaderCompilingThreads的值改为5这个是更改不占用CPU的比率，然后将WorkerProcessPriority改为1（0正常，1高优先级，2实时，默认为-1）这个是更改ShaderCompileWorker的优先级，改完重启UE应该就可以了。
+
+# 十四、打包Error C7582
+
+做项目时使用了Niagra模块，在打包时遇到了`Error C7582 : ‘bInitialOwnerVelocityFromActor’: default member initializers for bit-fields requires at least ‘/std:c++20’.`报错信息
+
+经查找几种原因也没发现为什么会这样，我使用的时5.4版本引擎
+
+从文档Epic C++ Coding Standard for Unreal Engine页面的Modern C++ Language Syntax部分可以查询到该版本Unreal使用的C++标准版本，总结如下：
+
+| 5.0  | C++ 17                        |
+| ---- | ----------------------------- |
+| 5.1  | C++ 17                        |
+| 5.2  | 最低支持C++17，使用C++ 20编译 |
+| 5.3  | 最低支持C++17，使用C++ 20编译 |
+| 5.4  | 最低支持C++17，使用C++ 20编译 |
+
+另外，项目属性也是stdsc++20的，最后还是需要在`.Build.cs`中添加`CppStandard = CppStandardVersion.Cpp20;`才可以
