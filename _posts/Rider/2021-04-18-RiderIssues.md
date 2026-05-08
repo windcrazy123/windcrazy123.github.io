@@ -14,7 +14,7 @@ tag: Misc
 
 # 一、UE配置Source Code中无法关联Rider
 
-![](/styles/images/Rider/UESouceCodeRider.png)
+![](../../styles/images/Rider/UESouceCodeRider.png)
 
 解决办法：在UE安装路径下的RiderLocations.txt文件中修改或增加Rider最新路径即可。
 
@@ -40,7 +40,7 @@ JetBrains Rider 2024.1.4 RD-241.18034.76
 
 在安装Rider并打开UE项目后会让你下载RiderLink plugin
 
-![](/styles/images/Rider/InstallRiderLinkWarning.png)
+![](../../styles/images/Rider/InstallRiderLinkWarning.png)
 
 点击Install plugin in Engine开始下载并编译，开始的时候出现
 
@@ -66,9 +66,9 @@ RiderLink plugin installed
 
 虽然看起来没有问题，但是在点击运行项目后会卡在75%加载插件的一步然后出现崩溃报错。
 
-![](/styles/images/Rider/RiderLinkError.png)
+![](../../styles/images/Rider/RiderLinkError.png)
 
-![](/styles/images/Rider/UECrashasRiderLink.png)
+![](../../styles/images/Rider/UECrashasRiderLink.png)
 
 ## 解决问题
 
@@ -80,7 +80,7 @@ Detected compiler newer than Visual Studio 2022, please update min version check
 
 既然说编译器版本高，那么我们就降低编译器版本。
 
-1. 转到 Visual Studio 安装程序 -> 修改 -> 单个组件->添加“MSVC v143 - VS 2022 c++ x64/x86 build tools (v14.38-17.8)”![](/styles/images/Rider/VSInstallMSVC.png)
+1. 转到 Visual Studio 安装程序 -> 修改 -> 单个组件->添加“MSVC v143 - VS 2022 c++ x64/x86 build tools (v14.38-17.8)”![](../../styles/images/Rider/VSInstallMSVC.png)
 2. 可以通过转到 VS 安装路径并查看文件夹是否存在来确认它是否安装了正确的文件夹（*C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130*）
 3. 将“C:\Users\My\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml”更改为
 
@@ -125,7 +125,7 @@ Warning：  BuildConfiguration.xml(5): [] The element 'WindowsPlatform' in names
 
 默认情况下，UE 会拉起系统最大线程数量的编译进程。就比如我电脑是16个
 
-![](/styles/images/Rider/16processes.png)
+![](../../styles/images/Rider/16processes.png)
 
 UE 里每个编译任务的 `/zm` 值为 1000：[VCToolChain.cs?q=%2Fzm#L354](https://cs.github.com/EpicGames/UnrealEngine/blob/d11782b9046e9d0b130309591e4efc57f4b8b037/Engine/Source/Programs/UnrealBuildTool/Platform/Windows/VCToolChain.cs?q=/zm#L354)
 表示每个 cl 进程会分配 750M 的虚拟内存：[/Zm (Specify precompiled header memory allocation limit)](https://docs.microsoft.com/en-us/cpp/build/reference/zm-specify-precompiled-header-memory-allocation-limit?view=msvc-160)
@@ -198,3 +198,57 @@ UE 里每个编译任务的 `/zm` 值为 1000：[VCToolChain.cs?q=%2Fzm#L354](ht
 > 并且需要注意的是：如果 `/zm` 值设置的太小，可能无法满足 UE 合并翻译单元的要求，导致编译错误，所以，最好还是修改系统虚拟内存大小或者控制并行的任务数量。
 >
 > 参考：https://ue5wiki.com/wiki/5cc4f8a/
+
+# 四、使用VS2026双击蓝图节点无法定位问题
+
+本来蓝图节点不论是右键后点击GoToDefinition还是直接双击蓝图节点都会查找代码所在位置然后定位过去，但是下载了VS2026后竟然没有了此功能。下面是定位逻辑
+
+```c++
+GraphEditorCommands->MapAction( FGraphEditorCommands::Get().GoToDefinition,
+				FExecuteAction::CreateSP( this, &FBlueprintEditor::OnGoToDefinition ),
+				FCanExecuteAction::CreateSP( this, &FBlueprintEditor::CanGoToDefinition )
+				);
+```
+
+```c++
+bool FBlueprintEditor::CanGoToDefinition() const
+{
+	const UEdGraphNode* Node = GetSingleSelectedNode();
+	return (Node != nullptr) && Node->CanJumpToDefinition();
+}
+
+void FBlueprintEditor::OnGoToDefinition()
+{
+	if (UEdGraphNode* SelectedGraphNode = GetSingleSelectedNode())
+	{
+		OnNodeDoubleClicked(SelectedGraphNode);
+	}
+}
+
+void FBlueprintEditor::OnNodeDoubleClicked(UEdGraphNode* Node)
+{
+	if (Node->CanJumpToDefinition())
+	{
+		Node->JumpToDefinition();
+	}
+}
+```
+
+之后一路探索下去发现
+
+```c++
+bool FSourceCodeAccessModule::CanCompileSourceCode() const
+{
+#if PLATFORM_WINDOWS
+	// Need to have Visual Studio installed to compile on Windows, regardless of chosen IDE
+	return IsSourceCodeAccessorAvailable("VisualStudio2022");
+#else
+	// Default behavior
+	return CanAccessSourceCode();
+#endif
+}
+```
+
+看了除了修改源码外只能使用VS2022了，下载好以后，更改Rider配置
+
+![](../..\styles\images\Rider\RiderBuildWith2022.png)
