@@ -75,7 +75,7 @@ SDKAPILevel=matchndk
 NDKAPILevel=latest
 ```
 
-# 解决办法
+## 解决办法
 
 在报错中看到了
 
@@ -87,7 +87,7 @@ NDKAPILevel=latest
 
 **解决办法：**
 
-## 一：下载并安装Java11
+### 一：下载并安装Java11
 
 从[Oracle官方网站](https://www.oracle.com/java/technologies/downloads/#java11-windows)下载Java11并安装。
 
@@ -97,7 +97,7 @@ NDKAPILevel=latest
 
 > 如果还不会请看(也有配置环境变量的步骤)：[jdk11 下载与安装（非常详细，一步不落！！！）](https://javaziliao.com/post/931.html)
 
-## 二：配置环境变量
+### 二：配置环境变量
 
 配置环境变量是为了让操作系统能够找到Java 11的安装路径。
 
@@ -106,7 +106,7 @@ NDKAPILevel=latest
 3. 点击新建，输入刚才安装Java11的位置里面的bin文件夹的位置，例如：`C:\Program Files\Java\jdk-11\bin`（默认路径）
 4. 点击确定。
 
-## 三：配置Android Studio(可能不需要，但我还是配置了)
+### 三：配置Android Studio(可能不需要，但我还是配置了)
 
 告诉Android Studio使用Java 11作为默认的Java版本，每个人由于Android Studio版本不同可能不一样。
 
@@ -151,9 +151,9 @@ A problem occurred configuring root project 'app'.
          > Read timed out
 ```
 
-# 新的问题(UE需要从网络上获取资源)
+## 新的问题(UE需要从网络上获取资源)
 
-## 一、Could not get resource 'https://repo.maven.apache.org/maven2/...'
+### 一、Could not get resource 'https://repo.maven.apache.org/maven2/...'
 
 配置成功后，出现了新的报错:
 
@@ -197,7 +197,7 @@ allprojects {
 
 如果安装失败请点击[跳转](#jump)
 
-## 二、Exception in thread "main" java.net.ConnectException: Connection timed out: connect
+### 二、Exception in thread "main" java.net.ConnectException: Connection timed out: connect
 
 > 参考：[Flutter新建项目运行报错Exception in thread "main" java.net.ConnectException: Connection timed out: connect](https://www.cnblogs.com/chorkiu/p/14767567.html)
 
@@ -241,7 +241,7 @@ Exception: Gradle task assembleDebug failed with exit code 1
 
 有两个方法
 
-### 1、方法一
+#### 1、方法一
 
 这个是[lipengzha](https://ue5wiki.com/wiki/6eed44f8/)作者提供的(我试了，没用)
 
@@ -253,7 +253,7 @@ C:\Users\lipengzha\.gradle\wrapper\dists\gradle-5.4.1-all\3221gyojl5jsh0helicew7
 
 然后创建一个环境变量 `ANDROID_HOME` 指向该路径即可。
 
-### 2、方法二
+#### 2、方法二
 
 仍然是下载对应版本的gradle压缩包，这个压缩包放在哪里都可以无需解压。
 
@@ -332,3 +332,35 @@ public class DoubaoTest : ModuleRules
 public bool bEnableExceptions { get; set; }
 ```
 
+# 三、Error NU1903
+
+完整报错有很多行，我就选其中一行展示：
+
+```cpp
+Gauntlet.Automation.csproj: Error NU1903 : Warning As Error: Package 'Magick.NET-Q16-HDRI-AnyCPU' 14.7.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-72hf-fj62-w6j4
+```
+
+这个在Epic社区也有人讨论：[Vulnerability of Magik.net](https://forums.unrealengine.com/t/vulnerability-of-magik-net/2650266)
+
+我是参考下面这个办法解决的
+
+I solved the issue by disabling the warnings inside the `PackageReference` tags in `AutomationTool.csproj`, `AutomationUtils.Automation.csproj`, and `Gauntlet.Automation.csproj`; i.e., respectively, I used:
+
+```xml
+<PackageReference Include="Magick.NET-Q16-HDRI-AnyCPU" Version="14.7.0">
+  <NoWarn>$(NoWarn);NU1901;NU1902;NU1903</NoWarn>
+</PackageReference>
+<PackageReference Include="Magick.NET-Q16-HDRI-AnyCPU" Version="14.7.0" PrivateAssets="all">
+  <NoWarn>$(NoWarn);NU1901;NU1902;NU1903</NoWarn>
+</PackageReference>
+```
+
+and
+
+```xml
+<PackageReference Include="Magick.NET-Q16-HDRI-AnyCPU" Version="14.7.0" PrivateAssets="all">
+  <NoWarn>$(NoWarn);NU1901;NU1902;NU1903</NoWarn>
+</PackageReference>
+```
+
+Obviously, that’s not ideal because we are now only ignoring the vulnerability, but it does the trick if the goal is to continue using that package version.
