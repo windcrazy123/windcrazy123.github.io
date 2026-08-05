@@ -364,3 +364,66 @@ and
 ```
 
 Obviously, that’s not ideal because we are now only ignoring the vulnerability, but it does the trick if the goal is to continue using that package version.
+
+# 四、ossl_typ.h(144): Error C2365 : “UI”: 重定义；以前的定义是“命名空间”
+
+EncryptTool.cpp:
+
+```cpp
+#include "EncryptTool.h"
+
+#include "openssl/hmac.h"
+//。。。
+```
+EncryptTool.h：
+```cpp
+class EncryptTool
+{
+public:
+	bool static CalculateHMACSHA256(const TArrayView<const uint8>& Message, const TArrayView<const uint8>& Key, TArray<uint8>& OutHmac);
+};
+```
+JwtSecurityHelper.cpp:
+```cpp
+#include "EncryptTool.h"
+EncryptTool::CalculateHMACSHA256(Message, Key, OutHmac);
+```
+报错：
+```ABAP
+[1/5] Compile [x64] EncryptTool.cpp
+11>ossl_typ.h(144): Error C2365 : “UI”: 重定义；以前的定义是“命名空间”
+11>ObjectMacros.h(886): Reference C2365 : 参见“UI”的声明
+```
+
+我试过在EncryptTool.cpp里使用
+
+```cpp
+#ifdef UI
+#undef UI
+#endif
+#include "openssl/hmac.h"
+```
+
+或者在Build.cs中添加
+
+```csharp
+PublicDefinitions.Add("OPENSSL_NO_UI=1");
+```
+
+但是并没有什么用
+
+## 解决方案
+
+EncryptTool.cpp:
+
+```cpp
+#define UI UI_ST
+THIRD_PARTY_INCLUDES_START
+#include "openssl/hmac.h"
+THIRD_PARTY_INCLUDES_END
+#undef UI
+```
+
+## 参考
+
+> [OpenSSL compile errorOpenSSL 编译错误](https://forums.unrealengine.com/t/openssl-compile-error/402878)
