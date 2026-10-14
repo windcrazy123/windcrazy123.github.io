@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "ClaudeCode"
-date: 2026-7-01 09:00:00 +0800 
-categories: LLM
+title: "安装llama_cpp_python库"
+date: 2026-10-14 09:00:00 +0800 
+categories: StableDiffusion
 tag: AI
 ---
 * content
